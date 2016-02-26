@@ -1,0 +1,27 @@
+{
+  "name": "perflint",
+  "version": "0.0.1",
+  "author": "Matthew Harrison-Jones <matt+npm@matthojo.co.uk>",
+  "description": "A Web page performance checker using WebPageTest.",
+  "bin": {
+    "perflint": "./bin/perflint.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perflint/perflint.git"
+  },
+  "keywords": [
+    "lint",
+    "performance",
+    "website",
+    "webpagetest"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perflint/perflint/issues"
+  },
+  "homepage": "https://github.com/perflint/perflint#readme"
+}
