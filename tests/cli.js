@@ -15,8 +15,14 @@ var assert = require('chai').assert,
 //------------------------------------------------------------------------------
 describe('cli', function() {
   describe('interpret()', function() {
-        it('should return error when no URL or WebPageTest test ID is specified', function() {
+
+        it('should return error when no API key for WebPageTest is specified', function() {
             var result = cli.interpret([ 'node', '/usr/local/bin/perflint' ])
+            assert.equal(result, 1)
+        })
+
+        it('should return error when no URL or WebPageTest test ID is specified', function() {
+            var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-k', 'somekey' ])
             assert.equal(result, 1)
         })
 
