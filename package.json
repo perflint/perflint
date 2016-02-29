@@ -7,7 +7,7 @@
     "perflint": "./bin/perflint.js"
   },
   "scripts": {
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./tests/*.js",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./tests/lib/*.js",
     "pretest": "npm run-script lint",
     "check-coverage": "(istanbul check-coverage --statements 90 --branches 90 --functions 100 --lines 90)",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
