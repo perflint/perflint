@@ -16,24 +16,20 @@ var assert = require('chai').assert,
 describe('cli', function() {
   describe('interpret()', function() {
 
-        it('should return error when no API key for WebPageTest is specified', function() {
-            var result = cli.interpret([ 'node', '/usr/local/bin/perflint' ])
-            assert.equal(result, 1)
-        })
-
-        it('should return error when no URL or WebPageTest test ID is specified', function() {
-            var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-k', 'somekey' ])
-            assert.equal(result, 1)
-        })
-
-        it('should return error when no config can be found', function() {
-            var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-u', 'example.com', '-c', '/tmp/', '-k', 'somekey' ])
-            assert.equal(result, 1)
-        })
-
-        it('should return error when an invalid formatter is specified', function() {
-            var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-u', 'example.com', '-f', 'tester', '-k', 'somekey' ])
-            assert.equal(result, 1)
-        })
+    it('should return error when no API key for WebPageTest is specified', function() {
+      var result = cli.interpret([ 'node', '/usr/local/bin/perflint' ])
+      assert.equal(result, 1)
     })
+
+    it('should return error when no URL or WebPageTest test ID is specified', function() {
+      var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-k', 'somekey' ])
+      assert.equal(result, 1)
+    })
+
+    it('should return error when no config can be found', function() {
+      var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-u', 'example.com', '-c', '/tmp/', '-k', 'somekey' ])
+      assert.equal(result, 1)
+    })
+
+  })
 })
