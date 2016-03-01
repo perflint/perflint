@@ -4,35 +4,43 @@ When setting rules you can specify the parameters to which a check should pass, 
 
 ### Check if a value is greater than expected
 This will check to see if the result is less than the `max` value specified.
-    {
-      "rules": {
-        "SpeedIndex": [{ "max": 2000 }, "error"]
-      }
-    }
+```json
+{
+  "rules": {
+    "SpeedIndex": [{ "max": 2000 }, "error"]
+  }
+}
+```
 
 ### Check if a value is less than expected
 This will check to see if the result is less than the `min` value specified.
-    {
-      "rules": {
-        "requestsJS": [{ "min": 1 }, "warning"]
-      }
-    }
+```json
+{
+  "rules": {
+    "requestsJS": [{ "min": 1 }, "warning"]
+  }
+}
+```
 
 ### Check if a value is within a range of values
 This will check to see if the result is within a range of values, it will validate on `max` before `min`.
-    {
-      "rules": {
-        "requestsDoc": [{ "min": 3, "max": 30 }, "warning"]
-      }
-    }
+```json
+{
+  "rules": {
+    "requestsDoc": [{ "min": 3, "max": 30 }, "warning"]
+  }
+}
+```
 
 ### Check if value matches expected value
 This will check to see if a result matches exactly with the value specified.
-    {
-      "rules": {
-        "responses_404": [0, "error"]
-      }
-    }
+```json
+{
+  "rules": {
+    "responses_404": [0, "error"]
+  }
+}
+```
 
 ## Available Rules
 This is the list of currently available rules to check against.
