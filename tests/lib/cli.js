@@ -7,13 +7,23 @@
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var assert = require('chai').assert,
-    cli = require('../../lib/cli')
+var assert     = require('chai').assert,
+    sinon      = require('sinon'),
+    proxyquire = require('proxyquire')
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 describe('cli', function() {
+
+  var log = {
+        info: sinon.spy(),
+        error: sinon.spy()
+      },
+      cli = proxyquire('../../lib/cli', {
+        './logging': log
+      })
+
   describe('interpret()', function() {
 
     it('should return error when no API key for WebPageTest is specified', function() {
