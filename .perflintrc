@@ -1,6 +1,4 @@
 {
-  "average": "median",
-  "view": "firstView",
   "rules": {
     "SpeedIndex": [{ "max": 2000 }, "error"],
     "requestsDoc": [{ "min": 3, "max": 30 }, "warning"],
