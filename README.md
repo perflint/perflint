@@ -10,10 +10,15 @@ PerfLint is a tool to identify unexpected performance levels of a Website, using
 
 ## Installation
 
-You can install ESLint using `npm`:
-
-    npm install -g perflint
+You can install PerfLint using `npm`:
+```shell
+npm install -g perflint
+```
 
 ## Usage
 
+See the [Command Line Interface](https://perflint.readme.io/docs/command-line-interface) docs.
+
 ## Configuration
+
+See the [Configuring PerfLint](https://perflint.readme.io/docs/configuring-perflint) docs.
