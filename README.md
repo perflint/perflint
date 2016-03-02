@@ -2,7 +2,9 @@
 [![Build Status](https://travis-ci.org/perflint/perflint.svg?branch=master)](https://travis-ci.org/perflint/perflint)
 [![Coverage Status](https://coveralls.io/repos/github/perflint/perflint/badge.svg?branch=master)](https://coveralls.io/github/perflint/perflint?branch=master)
 
-# PerfLint
+
+
+# ![PerfLint](https://cloud.githubusercontent.com/assets/367517/13446841/aa0aed32-e00e-11e5-8ca3-f88ec87ce4ae.png)
 
 PerfLint is a tool to identify unexpected performance levels of a Website, using [WebPageTest](http://www.webpagetest.org/) to obtain results.
 
