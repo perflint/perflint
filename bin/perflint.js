@@ -8,4 +8,13 @@ if (debug) {
 }
 
 var cli = require('../lib/cli')
-cli.interpret(process.argv)
+
+cli.interpret(process.argv, function(exitCode) {
+  if ('exitCode' in process) {
+    process.exitCode = exitCode
+  } else {
+    process.on('exit', function() {
+      process.exit(exitCode)
+    })
+  }
+})
