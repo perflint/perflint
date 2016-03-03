@@ -6,6 +6,8 @@
 
 # ![PerfLint](https://cloud.githubusercontent.com/assets/367517/13446841/aa0aed32-e00e-11e5-8ca3-f88ec87ce4ae.png)
 
+[Documentation](https://perflint.readme.io/docs) | [Configuring](https://perflint.readme.io/docs/configuring-perflint) | [Rules](https://perflint.readme.io/docs/rules)
+
 PerfLint is a tool to identify unexpected performance levels of a Website, using [WebPageTest](http://www.webpagetest.org/) to obtain results.
 
 ## Installation
