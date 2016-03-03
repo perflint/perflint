@@ -16,6 +16,8 @@
 describe('WebPageTest', function() {
   describe('getResults()', function() {
 
+    it('should return an error when an invalid server is defined')
+
     it('should return results for new tests')
 
     it('should return results for existing tests')
