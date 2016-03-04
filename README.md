@@ -19,8 +19,37 @@ npm install -g perflint
 
 ## Usage
 
-See the [Command Line Interface](https://perflint.readme.io/docs/command-line-interface) docs.
+See the [Command Line Interface](https://perflint.readme.io/docs/command-line-interface) documentation.
 
 ## Configuration
 
-See the [Configuring PerfLint](https://perflint.readme.io/docs/configuring-perflint) docs.
+See the [Configuring PerfLint](https://perflint.readme.io/docs/configuring-perflint) documentation.
+
+## Results
+See the [Exit Codes and Results](https://perflint.readme.io/docs/results) documentation.
+
+### Example Results
+These results are an example of the ['Stylish' formatter](https://perflint.readme.io/docs/stylish).
+
+#### With errors
+
+```shell
+http://example.com — http://www.webpagetest.org/results.php?test=160301_S3_1F0H
+    error  'SpeedIndex' is 5617 should be less than 2000  SpeedIndex
+  warning  'requestsDoc' is 57 should be less than 30     requestsDoc
+    error  'responses_404' is 1 should be 0               responses_404
+
+✖ 3 problems (2 errors, 1 warning)
+```
+
+#### With too many warnings
+```shell
+http://example.com — http://www.webpagetest.org/results.php?test=160301_S3_1F0H
+  warning  'SpeedIndex' is 5617 should be less than 2000  SpeedIndex
+  warning  'requestsDoc' is 57 should be less than 30     requestsDoc
+  warning  'responses_404' is 1 should be 0               responses_404
+
+✖ 3 problems (0 errors, 3 warnings)
+
+PerfLint found too many warnings (maximum: 1).
+```
