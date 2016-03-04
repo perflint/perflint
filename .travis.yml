@@ -9,4 +9,4 @@ after_success:
   - npm run coveralls
 addons:
   code_climate:
-      repo_token: 98bfd4f81ea2ddbdfd3aa5cbe4dacb2ab09c70d86009fa3a5c04eccb77c1b1eb
+    repo_token: 98bfd4f81ea2ddbdfd3aa5cbe4dacb2ab09c70d86009fa3a5c04eccb77c1b1eb
