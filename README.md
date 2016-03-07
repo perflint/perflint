@@ -28,7 +28,7 @@ See the [Configuring PerfLint](https://perflint.readme.io/docs/configuring-perfl
 ## Results
 See the [Exit Codes and Results](https://perflint.readme.io/docs/results) documentation.
 
-### Example Results
+### Example Results
 These results are an example of the ['Stylish' formatter](https://perflint.readme.io/docs/stylish).
 
 #### With errors
