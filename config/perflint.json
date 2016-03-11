@@ -1,0 +1,9 @@
+{
+  "private": false,
+  "location": "Dulles:Chrome",
+  "connectivity": "Cable",
+  "label": "PerfLint Test",
+  "average": "median",
+  "view": "firstView",
+  "rules": { }
+}
