@@ -53,3 +53,7 @@ http://example.com — http://www.webpagetest.org/results.php?test=160301_S3_1F0
 
 PerfLint found too many warnings (maximum: 1).
 ```
+
+## Contributors
+
+* Matthew Harrison-Jones ([@matthojo](https://github.com/matthojo))
