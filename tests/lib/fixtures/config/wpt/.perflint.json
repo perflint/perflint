@@ -1,0 +1,14 @@
+{
+  "private": false,
+  "location": "Dulles:Chrome",
+  "connectivity": "Cable",
+  "timeout": 120,
+  "URL": "http://example.com",
+  "server": "www.webpagetest.org",
+  "format": "stylish",
+  "maxWarnings": -1,
+  "label": "PerfLint CI Test",
+  "average": "median",
+  "view": "firstView",
+  "rules": {}
+}
