@@ -1,4 +1,5 @@
-[![NPM version](https://img.shields.io/npm/v/perflint.svg?style=flat-square)](https://www.npmjs.com/package/perflint)
+[![NPM version](https://img.shields.io/npm/v/perflint.svg?style=flat)](https://www.npmjs.com/package/perflint)
+[![NPM dependencies](https://david-dm.org/perflint/perflint.svg)](https://david-dm.org/perflint/perflint)
 [![Build Status](https://travis-ci.org/perflint/perflint.svg?branch=master)](https://travis-ci.org/perflint/perflint)
 [![Coverage Status](https://coveralls.io/repos/github/perflint/perflint/badge.svg?branch=master)](https://coveralls.io/github/perflint/perflint?branch=master)
 
