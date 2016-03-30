@@ -7,18 +7,20 @@
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var assert        = require('chai').assert,
-    wpt           = require('../../../lib/service/webpagetest'),
-    defaultConfig = require('../fixtures/config/wpt/.perflint.json')
+var assert         = require('chai').assert,
+    wpt            = require('../../../lib/service/webpagetest'),
+    defaultConfig  = require('../fixtures/config/wpt/.perflint.json'),
+    exampleResults = require('../fixtures/results/wpt/example.json')
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 describe('WebPageTest', function() {
+  var config = defaultConfig
+  config.key = process.env.PERFLINT_KEY
+  config.private = true
 
   describe('getResults()', function() {
-    var config = defaultConfig
-    config.key = process.env.PERFLINT_KEY
 
     beforeEach(function() {
       // Reset config
@@ -59,11 +61,28 @@ describe('WebPageTest', function() {
 
   describe('translateResults()', function() {
 
-    it('should return error with invalid \'average\' in config')
+    beforeEach(function() {
+      // Reset config
+      config.average = 'median'
+      config.view = 'firstView'
+    })
 
-    it('should return error with invalid \'view\' in config')
+    it('should return error with invalid \'average\' in config', function() {
+      config.average = 'invalidAverage'
+      var res = wpt.translateResults(config, exampleResults)
+      assert.equal(res, 1)
+    })
 
-    it('should return formatted results')
+    it('should return error with invalid \'view\' in config', function() {
+      config.view = 'invalidView'
+      var res = wpt.translateResults(config, exampleResults)
+      assert.equal(res, 1)
+    })
+
+    it('should return formatted results', function() {
+      var res = wpt.translateResults(config, exampleResults)
+      assert.isObject(res, 'Data is an object')
+    })
 
   })
 })
