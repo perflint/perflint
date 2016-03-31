@@ -7,10 +7,11 @@
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var assert     = require('chai').assert,
-    sinon      = require('sinon'),
-    proxyquire = require('proxyquire'),
-    join       = require('path').join
+var assert         = require('chai').assert,
+    sinon          = require('sinon'),
+    proxyquire     = require('proxyquire'),
+    join           = require('path').join,
+    defaultConfig  = require('./fixtures/config/wpt/.perflint.json')
 
 //------------------------------------------------------------------------------
 // Tests
@@ -97,7 +98,7 @@ describe('cli', function() {
   describe('interpret()', function() {
 
     it('should return error when no API key for WebPageTest is specified', function() {
-      var result = cli.interpret([ 'node', '/usr/local/bin/perflint' ])
+      var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-k', '' ])
       assert.equal(result, 1)
     })
 
@@ -109,6 +110,23 @@ describe('cli', function() {
     it('should return error when no config can be found', function() {
       var result = cli.interpret([ 'node', '/usr/local/bin/perflint', '-u', 'example.com', '-c', '/tmp/', '-k', 'somekey' ])
       assert.equal(result, 1)
+    })
+
+  })
+
+  describe('run()', function() {
+
+    it('should return max warnings if too many', function(done) {
+      defaultConfig.maxWarnings = 0
+      defaultConfig.test = '160330_AJ_NRV'
+      defaultConfig.rules = {
+        'responses_404': [0, 'warning']
+      }
+      cli.run(defaultConfig, function(result) {
+        assert.equal(result, 1)
+        done()
+      })
+
     })
 
   })
