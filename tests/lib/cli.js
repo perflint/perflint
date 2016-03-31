@@ -129,5 +129,17 @@ describe('cli', function() {
 
     })
 
+    it('should return 1 if errors are found', function(done) {
+      defaultConfig.test = '160330_AJ_NRV'
+      defaultConfig.rules = {
+        'responses_404': [0, 'error']
+      }
+      cli.run(defaultConfig, function(result) {
+        assert.equal(result, 1)
+        done()
+      })
+
+    })
+
   })
 })
