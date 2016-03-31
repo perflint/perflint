@@ -129,10 +129,34 @@ describe('cli', function() {
 
     })
 
-    it('should return 1 if errors are found', function(done) {
+    it('should return 1 if errors are found with flat rule', function(done) {
       defaultConfig.test = '160330_AJ_NRV'
       defaultConfig.rules = {
         'responses_404': [0, 'error']
+      }
+      cli.run(defaultConfig, function(result) {
+        assert.equal(result, 1)
+        done()
+      })
+
+    })
+
+    it('should return 1 if errors are found with max rule', function(done) {
+      defaultConfig.test = '160330_AJ_NRV'
+      defaultConfig.rules = {
+        'SpeedIndex': [{ 'max': 100 }, 'error']
+      }
+      cli.run(defaultConfig, function(result) {
+        assert.equal(result, 1)
+        done()
+      })
+
+    })
+
+    it('should return 1 if errors are found with ranged rule', function(done) {
+      defaultConfig.test = '160330_AJ_NRV'
+      defaultConfig.rules = {
+        'requestsDoc': [{ 'min': 3, 'max': 30 }, 'error']
       }
       cli.run(defaultConfig, function(result) {
         assert.equal(result, 1)
