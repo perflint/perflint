@@ -7,10 +7,34 @@
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var assert         = require('chai').assert,
-    wpt            = require('../../../lib/service/webpagetest'),
-    defaultConfig  = require('../fixtures/config/wpt/.perflint.json'),
-    exampleResults = require('../fixtures/results/wpt/example.json')
+var assert     = require('chai').assert,
+    chalk      = require('chalk'),
+    proxyquire = require('proxyquire'),
+    sinon      = require('sinon')
+
+// Chalk protects its methods so we need to inherit from it
+// for Sinon to work.
+var chalkStub = Object.create(chalk, {
+  dim: {
+    value: function(str) {
+      return chalk.dim(str)
+    },
+    writable: true
+  },
+  underline: {
+    value: function(str) {
+      return chalk.underline(str)
+    },
+    writable: true
+  }
+})
+
+chalkStub.dim = chalk.dim
+chalkStub.underline = chalk.underline
+
+var wpt        = proxyquire('../../../lib/service/webpagetest', { chalk: chalkStub }),
+defaultConfig  = require('../fixtures/config/wpt/.perflint.json'),
+exampleResults = require('../fixtures/results/wpt/example.json')
 
 //------------------------------------------------------------------------------
 // Tests
@@ -83,6 +107,31 @@ describe('WebPageTest', function() {
       var res = wpt.translateResults(config, exampleResults)
       assert.isObject(res, 'Data is an object')
     })
+
+  })
+
+  describe('printInfo()', function() {
+    var sandbox,
+        colorsEnabled = chalk.enabled
+
+      beforeEach(function() {
+        chalk.enabled = false
+        sandbox = sinon.sandbox.create()
+        sandbox.spy(chalkStub, 'underline')
+        sandbox.spy(chalkStub, 'dim')
+      })
+
+      afterEach(function() {
+        sandbox.verifyAndRestore()
+        chalk.enabled = colorsEnabled
+      })
+
+    it('should return a string in the correct format', function() {
+      wpt.printInfo(config, exampleResults)
+      assert.equal(chalkStub.underline.callCount, 2)
+      assert.equal(chalkStub.dim.callCount, 9)
+    })
+
 
   })
 })

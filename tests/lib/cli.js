@@ -9,7 +9,8 @@
 //------------------------------------------------------------------------------
 var assert     = require('chai').assert,
     sinon      = require('sinon'),
-    proxyquire = require('proxyquire')
+    proxyquire = require('proxyquire'),
+    join       = require('path').join
 
 //------------------------------------------------------------------------------
 // Tests
@@ -17,12 +18,81 @@ var assert     = require('chai').assert,
 describe('cli', function() {
 
   var log = {
-        info: sinon.spy(),
-        error: sinon.spy()
+        info: function() {},
+        error: function() {}
       },
-      cli = proxyquire('../../lib/cli', {
-        './logging': log
-      })
+      cli = proxyquire('../../lib/cli', { './logging': log })
+
+  describe('getConfig()', function() {
+    it('should return a config when provide a valid path', function() {
+      var result = cli.getConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt'))
+      assert.isObject(result, 'Data is an object')
+    })
+  })
+
+  describe('loadConfig()', function() {
+    var sandbox
+
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create()
+      sandbox.spy(log, 'info')
+      sandbox.spy(log, 'error')
+    })
+
+    afterEach(function() {
+      sandbox.verifyAndRestore()
+    })
+
+    it('should return a config when provide a valid file', function() {
+      var result = cli.loadConfig(join(__dirname, 'fixtures', 'config', 'wpt', '.perflint.json'))
+      assert.isObject(result, 'Data is an object')
+    })
+
+    it('should return an error when provided a invalid file path', function() {
+      var result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt', '.nonexistant'))
+      assert(log.error.calledOnce, 'should output error')
+      assert.equal(result, 1)
+    })
+
+    it('should return an error when config is invalid JSON', function() {
+      var result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt', 'invalid.json'))
+      assert(log.error.calledOnce, 'should output error')
+      assert.equal(result, 1)
+    })
+  })
+
+  describe('printResults()', function() {
+    var sandbox,
+        results = [{
+          url: 'http://example.com',
+          summary: 'Summary link',
+          messages: [],
+          errorCount: 0,
+          warningCount: 0
+        }]
+
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create()
+      sandbox.spy(log, 'info')
+      sandbox.spy(log, 'error')
+    })
+
+    afterEach(function() {
+      sandbox.verifyAndRestore()
+    })
+
+    it('should return an error is formatter does not exist', function() {
+      var result = cli.printResults(results, 'invalid')
+      assert.isFalse(result)
+      assert(log.error.calledOnce, 'should output error')
+    })
+
+    it('should output results', function() {
+      var result = cli.printResults(results, 'json')
+      assert.isTrue(result)
+      assert(log.info.calledOnce, 'should output info')
+    })
+  })
 
   describe('interpret()', function() {
 
