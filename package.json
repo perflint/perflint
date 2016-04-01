@@ -1,6 +1,6 @@
 {
   "name": "perflint",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Matthew Harrison-Jones <matt+npm@matthojo.co.uk>",
   "description": "A Web page performance checker using WebPageTest.",
   "bin": {
