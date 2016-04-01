@@ -57,7 +57,7 @@ describe('WebPageTest', function() {
       this.timeout(config.timeout * 2000)
       wpt.getResults(config, function(err, data) {
         assert.equal(err, null)
-        assert.isObject(data, 'Data is an object')
+        assert.isObject(data[0], 'Data is an object')
         done()
       })
     })
@@ -67,7 +67,7 @@ describe('WebPageTest', function() {
       config.test = '160317_RP_N76'
       wpt.getResults(config, function(err, data) {
         assert.equal(err, null)
-        assert.isObject(data, 'Data is an object')
+        assert.isObject(data[0], 'Data is an object')
         done()
       })
     })
@@ -129,7 +129,7 @@ describe('WebPageTest', function() {
     it('should return a string in the correct format', function() {
       wpt.printInfo(config, exampleResults)
       assert.equal(chalkStub.underline.callCount, 2)
-      assert.equal(chalkStub.dim.callCount, 9)
+      assert.equal(chalkStub.dim.callCount, 10)
     })
 
 
