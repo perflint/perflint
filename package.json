@@ -48,5 +48,8 @@
     "shelljs": "^0.7.0",
     "text-table": "^0.2.0",
     "webpagetest": "^0.3.4"
+  },
+  "engines": {
+    "node": ">=4.4.6"
   }
 }

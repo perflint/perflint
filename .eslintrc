@@ -5,10 +5,13 @@
     "linebreak-style": [ 2, "unix" ],
     "semi": [ 2, "never" ],
     "no-unused-vars": [ 2, "all" ],
-    "no-console": 0
+    "no-console": 0,
+    "strict": [2, "global"],
+    "global-strict": [0, "always"]
   },
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
   "extends": "eslint:recommended"
 }
