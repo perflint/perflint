@@ -18,11 +18,11 @@ var assert         = require('chai').assert,
 //------------------------------------------------------------------------------
 describe('cli', function() {
 
-  var log = {
-        info: function() {},
-        error: function() {}
-      },
-      cli = proxyquire('../../lib/cli', { './logging': log })
+  const log = {
+    info() {},
+    error() {}
+  },
+  cli = proxyquire('../../lib/cli', { './logging': log })
 
   describe('getConfig()', function() {
     it('should return a config when provide a valid path', function() {
