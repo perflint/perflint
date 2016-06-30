@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-var debug = (process.argv.indexOf('--debug') > -1)
+'use strict'
+
+const debug = (process.argv.indexOf('--debug') > -1)
 
 // must do this initialization *before* other requires in order to work
 if (debug) {
@@ -9,11 +11,11 @@ if (debug) {
 
 var cli = require('../lib/cli')
 
-cli.interpret(process.argv, function(exitCode) {
+cli.interpret(process.argv, exitCode => {
   if ('exitCode' in process) {
     process.exitCode = exitCode
   } else {
-    process.on('exit', function() {
+    process.on('exit', () => {
       process.exit(exitCode)
     })
   }
