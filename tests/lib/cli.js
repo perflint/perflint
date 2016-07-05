@@ -62,40 +62,6 @@ describe('cli', () => {
     })
   })
 
-  describe('printResults()', () => {
-    let sandbox
-
-    const results = [{
-      url: 'http://example.com',
-      summary: 'Summary link',
-      messages: [],
-      errorCount: 0,
-      warningCount: 0
-    }]
-
-    beforeEach(() => {
-      sandbox = sinon.sandbox.create()
-      sandbox.spy(log, 'info')
-      sandbox.spy(log, 'error')
-    })
-
-    afterEach(() => {
-      sandbox.verifyAndRestore()
-    })
-
-    it('should return an error is formatter does not exist', () => {
-      const result = cli.printResults(results, 'invalid')
-      assert.isFalse(result)
-      assert(log.error.calledOnce, 'should output error')
-    })
-
-    it('should output results', () => {
-      const result = cli.printResults(results, 'json')
-      assert.isTrue(result)
-      assert(log.info.calledOnce, 'should output info')
-    })
-  })
-
   describe('interpret()', () => {
 
     it('should return error when no API key for WebPageTest is specified', () => {
