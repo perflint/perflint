@@ -11,7 +11,7 @@ var assert         = require('chai').assert,
     sinon          = require('sinon'),
     proxyquire     = require('proxyquire'),
     join           = require('path').join,
-    defaultConfig  = require('./fixtures/config/wpt/.perflint.json')
+    defaultConfig  = require('./fixtures/config/perflint/.perflint.json')
 
 //------------------------------------------------------------------------------
 // Tests
@@ -26,7 +26,7 @@ describe('cli', () => {
 
   describe('getConfig()', () => {
     it('should return a config when provide a valid path', () => {
-      const result = cli.getConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt'))
+      const result = cli.getConfig(join(__dirname, '..', 'fixtures', 'config', 'perflint'))
       assert.isObject(result, 'Data is an object')
     })
   })
@@ -45,18 +45,18 @@ describe('cli', () => {
     })
 
     it('should return a config when provide a valid file', () => {
-      const result = cli.loadConfig(join(__dirname, 'fixtures', 'config', 'wpt', '.perflint.json'))
+      const result = cli.loadConfig(join(__dirname, 'fixtures', 'config', 'perflint', '.perflint.json'))
       assert.isObject(result, 'Data is an object')
     })
 
     it('should return an error when provided a invalid file path', () => {
-      const result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt', '.nonexistant'))
+      const result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'perflint', '.nonexistant'))
       assert(log.error.calledOnce, 'should output error')
       assert.equal(result, 1)
     })
 
     it('should return an error when config is invalid JSON', () => {
-      const result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'wpt', 'invalid.json'))
+      const result = cli.loadConfig(join(__dirname, '..', 'fixtures', 'config', 'invalid.json'))
       assert(log.error.calledOnce, 'should output error')
       assert.equal(result, 1)
     })
@@ -87,48 +87,66 @@ describe('cli', () => {
       defaultConfig.maxWarnings = 0
       defaultConfig.test = '160330_AJ_NRV'
       defaultConfig.rules = {
-        'responses_404': [0, 'warning']
+        'webpagetest.pageSummary': [
+          {
+            'metric': 'median.firstView.responses_404',
+            'message': 'Too many 404 responses',
+            'max': 0,
+            'severity': 'warning',
+            'unit': 'number'
+          }
+        ]
       }
-      cli.run(defaultConfig, result => {
-        assert.equal(result, 1)
-        done()
-      })
 
-    })
-
-    it('should return 1 if errors are found with flat rule', done => {
-      defaultConfig.test = '160330_AJ_NRV'
-      defaultConfig.rules = {
-        'responses_404': [0, 'error']
-      }
-      cli.run(defaultConfig, result => {
-        assert.equal(result, 1)
-        done()
-      })
+      cli.run(defaultConfig)
+        .then(result => {
+          assert.equal(result, 1)
+          done()
+        })
 
     })
 
     it('should return 1 if errors are found with max rule', done => {
       defaultConfig.test = '160330_AJ_NRV'
       defaultConfig.rules = {
-        'SpeedIndex': [{ 'max': 100 }, 'error']
+        'webpagetest.pageSummary': [
+          {
+            'metric': 'median.firstView.SpeedIndex',
+            'message': 'SpeedIndex is too high',
+            'max': 100,
+            'severity': 'error',
+            'unit': 'number'
+          }
+        ]
       }
-      cli.run(defaultConfig, result => {
-        assert.equal(result, 1)
-        done()
-      })
+
+      cli.run(defaultConfig)
+        .then(result => {
+          assert.equal(result, 1)
+          done()
+        })
 
     })
 
-    it('should return 1 if errors are found with ranged rule', done => {
+    it('should return 1 if errors are found with min rule', done => {
       defaultConfig.test = '160330_AJ_NRV'
       defaultConfig.rules = {
-        'requestsDoc': [{ 'min': 3, 'max': 30 }, 'error']
+        'webpagetest.pageSummary': [
+          {
+            'metric': 'median.firstView.SpeedIndex',
+            'message': 'SpeedIndex is too low',
+            'min': 90000,
+            'severity': 'error',
+            'unit': 'number'
+          }
+        ]
       }
-      cli.run(defaultConfig, result => {
-        assert.equal(result, 1)
-        done()
-      })
+
+      cli.run(defaultConfig)
+        .then(result => {
+          assert.equal(result, 1)
+          done()
+        })
 
     })
 

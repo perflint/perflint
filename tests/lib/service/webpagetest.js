@@ -34,7 +34,7 @@ chalkStub.dim = chalk.dim
 chalkStub.underline = chalk.underline
 
 var wpt        = proxyquire('../../../lib/service/webpagetest', { chalk: chalkStub }),
-defaultConfig  = require('../fixtures/config/wpt/.perflint.json'),
+defaultConfig  = require('../fixtures/config/perflint/.perflint.json'),
 exampleResults = require('../fixtures/results/wpt/example.json')
 
 //------------------------------------------------------------------------------
@@ -56,57 +56,30 @@ describe('WebPageTest', () => {
 
     it('should return results for new tests', function(done) {
       this.timeout(config.timeout * 2000)
-      wpt.getResults(config, (err, data) => {
-        assert.equal(err, null)
-        assert.isObject(data[0], 'Data is an object')
-        done()
-      })
+      wpt.getResults(config)
+        .then((data) => {
+          assert.isObject(data[0], 'Data is an object')
+          done()
+        })
     })
 
     it('should return results for existing tests', done => {
       delete config.URL
       config.test = '160317_RP_N76'
-      wpt.getResults(config, (err, data) => {
-        assert.equal(err, null)
-        assert.isObject(data[0], 'Data is an object')
-        done()
-      })
+      wpt.getResults(config)
+        .then((data) => {
+          assert.isObject(data[0], 'Data is an object')
+          done()
+        })
     })
 
     it('should return an error when an invalid server is defined', done => {
       config.server = 'www.invalidurl.com'
-      wpt.getResults(config, (err, data) => {
-        assert.equal(err, 1)
-        assert.equal(data, null)
-        done()
-      })
-    })
-
-  })
-
-  describe('translateResults()', () => {
-
-    beforeEach(() => {
-      // Reset config
-      config.average = 'median'
-      config.view = 'firstView'
-    })
-
-    it('should return error with invalid \'average\' in config', () => {
-      config.average = 'invalidAverage'
-      const res = wpt.translateResults(config, exampleResults)
-      assert.equal(res, 1)
-    })
-
-    it('should return error with invalid \'view\' in config', () => {
-      config.view = 'invalidView'
-      const res = wpt.translateResults(config, exampleResults)
-      assert.equal(res, 1)
-    })
-
-    it('should return formatted results', () => {
-      const res = wpt.translateResults(config, exampleResults)
-      assert.isObject(res, 'Data is an object')
+      wpt.getResults(config)
+        .catch(err => {
+          assert.isDefined(err)
+          done()
+        })
     })
 
   })

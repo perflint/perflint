@@ -8,7 +8,5 @@
   "format": "stylish",
   "maxWarnings": -1,
   "label": "PerfLint CI Test",
-  "average": "median",
-  "view": "firstView",
   "rules": {}
 }

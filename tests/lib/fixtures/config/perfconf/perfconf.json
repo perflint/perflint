@@ -1,0 +1,32 @@
+{
+  "webpagetest.pageSummary": [
+    {
+      "metric": "median.firstView.SpeedIndex",
+      "message": "SpeedIndex is too high",
+      "max": 2000,
+      "severity": "error",
+      "unit": "number"
+    },
+    {
+      "metric": "median.firstView.requestsDoc",
+      "message": "Not enough document requests",
+      "min": 3,
+      "severity": "warning",
+      "unit": "number"
+    },
+    {
+      "metric": "median.firstView.requestsDoc",
+      "message": "Too many document requests",
+      "max": 30,
+      "severity": "warning",
+      "unit": "number"
+    },
+    {
+      "metric": "median.firstView.responses_404",
+      "message": "Too many 404 responses",
+      "max": 0,
+      "severity": "error",
+      "unit": "number"
+    }
+  ]
+}
