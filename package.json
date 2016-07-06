@@ -45,6 +45,7 @@
     "debug": "^2.2.0",
     "js-yaml": "^3.6.1",
     "lodash": "^4.5.1",
+    "lodash.escape": "^4.0.0",
     "progress": "^1.1.8",
     "shelljs": "^0.7.0",
     "text-table": "^0.2.0",
