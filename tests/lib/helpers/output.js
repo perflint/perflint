@@ -55,4 +55,20 @@ describe('helpers', () => {
       assert(log.info.calledOnce, 'should output info')
     })
   })
+
+  describe('returnResults()', () => {
+
+    const results = [{
+      url: 'http://example.com',
+      summary: 'Summary link',
+      messages: [],
+      errorCount: 0,
+      warningCount: 0
+    }]
+
+    it('should output results JSON', () => {
+      const result = helpers.returnResults(results)
+      assert.isArray(JSON.parse(result))
+    })
+  })
 })
