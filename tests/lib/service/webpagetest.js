@@ -82,6 +82,17 @@ describe('WebPageTest', () => {
         })
     })
 
+    it('should return an error when an invalid server and a test is defined', done => {
+      delete config.URL
+      config.server = 'www.invalidurl.com'
+      config.test = '160317_RP_N76'
+      wpt.getResults(config)
+        .catch(err => {
+          assert.isDefined(err)
+          done()
+        })
+    })
+
   })
 
   describe('printInfo()', () => {

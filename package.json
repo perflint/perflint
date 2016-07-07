@@ -53,5 +53,10 @@
   },
   "engines": {
     "node": ">=4.4.6"
+  },
+  "nyc": {
+    "exclude": [
+      "tests/**/*.js"
+    ]
   }
 }
