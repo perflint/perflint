@@ -32,7 +32,7 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.6",
     "eslint": "^3.0.0",
-    "istanbul": "^0.4.2",
+    "istanbul": "^0.4.5",
     "mocha": "^2.4.5",
     "proxyquire": "^1.7.4",
     "sinon": "^1.17.3",
