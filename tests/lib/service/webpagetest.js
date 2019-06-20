@@ -1,5 +1,4 @@
-'use strict'
-
+/* eslint-disable func-names */
 /**
  * @fileoverview Tests for WebPageTest module
  * @author Matthew Harrison-Jones
@@ -8,10 +7,10 @@
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-var assert     = require('chai').assert,
-    chalk      = require('chalk'),
-    proxyquire = require('proxyquire'),
-    sinon      = require('sinon')
+const { assert } = require('chai')
+const chalk = require('chalk')
+const proxyquire = require('proxyquire')
+const sinon = require('sinon')
 
 // Chalk protects its methods so we need to inherit from it
 // for Sinon to work.
@@ -33,9 +32,9 @@ const chalkStub = Object.create(chalk, {
 chalkStub.dim = chalk.dim
 chalkStub.underline = chalk.underline
 
-var wpt        = proxyquire('../../../lib/service/webpagetest', { chalk: chalkStub }),
-defaultConfig  = require('../fixtures/config/wpt/.perflint.json'),
-exampleResults = require('../fixtures/results/wpt/example.json')
+const wpt = proxyquire('../../../lib/service/webpagetest', { chalk: chalkStub })
+const defaultConfig = require('../fixtures/config/wpt/.perflint.json')
+const exampleResults = require('../fixtures/results/wpt/example.json')
 
 //------------------------------------------------------------------------------
 // Tests
@@ -46,7 +45,6 @@ describe('WebPageTest', () => {
   config.private = true
 
   describe('getResults()', () => {
-
     beforeEach(() => {
       // Reset config
       config.server = 'www.webpagetest.org'
@@ -63,7 +61,7 @@ describe('WebPageTest', () => {
       })
     })
 
-    it('should return results for existing tests', done => {
+    it('should return results for existing tests', (done) => {
       delete config.URL
       config.test = '160317_RP_N76'
       wpt.getResults(config, (err, data) => {
@@ -73,7 +71,7 @@ describe('WebPageTest', () => {
       })
     })
 
-    it('should return an error when an invalid server is defined', done => {
+    it('should return an error when an invalid server is defined', (done) => {
       config.server = 'www.invalidurl.com'
       wpt.getResults(config, (err, data) => {
         assert.equal(err, 1)
@@ -81,24 +79,22 @@ describe('WebPageTest', () => {
         done()
       })
     })
-
   })
 
   describe('translateResults()', () => {
-
     beforeEach(() => {
       // Reset config
       config.average = 'median'
       config.view = 'firstView'
     })
 
-    it('should return error with invalid \'average\' in config', () => {
+    it("should return error with invalid 'average' in config", () => {
       config.average = 'invalidAverage'
       const res = wpt.translateResults(config, exampleResults)
       assert.equal(res, 1)
     })
 
-    it('should return error with invalid \'view\' in config', () => {
+    it("should return error with invalid 'view' in config", () => {
       config.view = 'invalidView'
       const res = wpt.translateResults(config, exampleResults)
       assert.equal(res, 1)
@@ -108,7 +104,6 @@ describe('WebPageTest', () => {
       const res = wpt.translateResults(config, exampleResults)
       assert.isObject(res, 'Data is an object')
     })
-
   })
 
   describe('printInfo()', () => {
@@ -117,7 +112,7 @@ describe('WebPageTest', () => {
 
     beforeEach(() => {
       chalk.enabled = false
-      sandbox = sinon.sandbox.create()
+      sandbox = sinon.createSandbox()
       sandbox.spy(chalkStub, 'underline')
       sandbox.spy(chalkStub, 'dim')
     })
