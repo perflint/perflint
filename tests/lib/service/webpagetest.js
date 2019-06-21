@@ -44,6 +44,8 @@ describe('WebPageTest', () => {
   config.key = process.env.PERFLINT_KEY
   config.private = true
 
+  let existingTestId = 'not-set'
+
   describe('getResults()', () => {
     beforeEach(() => {
       // Reset config
@@ -57,13 +59,15 @@ describe('WebPageTest', () => {
       wpt.getResults(config, (err, data) => {
         assert.equal(err, null)
         assert.isObject(data[0], 'Data is an object')
+        // Set ID of known test
+        existingTestId = data[0].id
         done()
       })
     })
 
     it('should return results for existing tests', (done) => {
       delete config.URL
-      config.test = '160317_RP_N76'
+      config.test = existingTestId
       wpt.getResults(config, (err, data) => {
         assert.equal(err, null)
         assert.isObject(data[0], 'Data is an object')
