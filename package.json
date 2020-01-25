@@ -45,7 +45,7 @@
     "strip-ansi": "^5.2.0"
   },
   "dependencies": {
-    "async": "^3.0.1",
+    "async": "^3.1.1",
     "chalk": "^2.4.2",
     "cli": "^1.0.1",
     "debug": "^4.1.1",
