@@ -51,7 +51,7 @@
     "debug": "^4.1.1",
     "lodash": "^4.5.1",
     "progress": "^2.0.3",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "text-table": "^0.2.0",
     "webpagetest": "^0.3.4"
   },
