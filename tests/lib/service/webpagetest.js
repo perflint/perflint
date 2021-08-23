@@ -33,6 +33,7 @@ chalkStub.dim = chalk.dim
 chalkStub.underline = chalk.underline
 
 const wpt = proxyquire('../../../lib/service/webpagetest', { chalk: chalkStub })
+const translateResults = require('../../../lib/service/webpagetest/translate')
 const defaultConfig = require('../fixtures/config/wpt/.perflint.json')
 const exampleResults = require('../fixtures/results/wpt/example.json')
 
@@ -94,18 +95,18 @@ describe('WebPageTest', () => {
 
     it("should return error with invalid 'average' in config", () => {
       config.average = 'invalidAverage'
-      const res = wpt.translateResults(config, exampleResults)
+      const res = translateResults(config, exampleResults)
       assert.equal(res, 1)
     })
 
     it("should return error with invalid 'view' in config", () => {
       config.view = 'invalidView'
-      const res = wpt.translateResults(config, exampleResults)
+      const res = translateResults(config, exampleResults)
       assert.equal(res, 1)
     })
 
     it('should return formatted results', () => {
-      const res = wpt.translateResults(config, exampleResults)
+      const res = translateResults(config, exampleResults)
       assert.isObject(res, 'Data is an object')
     })
   })
@@ -127,7 +128,7 @@ describe('WebPageTest', () => {
     })
 
     it('should return a string in the correct format', () => {
-      wpt.printInfo(config, exampleResults)
+      wpt.printInfo(exampleResults)
       assert.equal(chalkStub.underline.callCount, 2)
       assert.equal(chalkStub.dim.callCount, 10)
     })
